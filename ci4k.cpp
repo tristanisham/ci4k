@@ -2,6 +2,11 @@
 //
 #include "wtypes.h"
 #include <iostream>
+#include <chrono>
+#include <ctime>
+#include <thread>
+#include <functional>
+
 using namespace std;
 
 void DesktopResolution(int& horizontal, int& vertical) {
@@ -15,23 +20,25 @@ void DesktopResolution(int& horizontal, int& vertical) {
     vertical = desktop.bottom;
 }
 
+void timer(function<void(void)> func, unsigned int interval) {
+    thread([func, interval]() {
+
+        while (true) {
+            auto delay = std::chrono::steady_clock::now() + chrono::milliseconds(interval);
+            func();
+            this_thread::sleep_until(delay);
+        }
+    }).detach();
+}
+
 int main()
 {
         std::cout << "ci4k v0.0.1\n";
         int horizontal = 0;
         int vertical = 0;
+        
         DesktopResolution(horizontal, vertical);
-        cout << horizontal << '\n' << vertical << '\n';
+        
         return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
