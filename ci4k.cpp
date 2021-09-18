@@ -21,12 +21,15 @@ using namespace std;
 //}
 
 void timer(function<void(void)> func, unsigned int interval) {
-    thread([func, interval]() {
+    cout << "Timer started!\n";
+    std::thread([func, interval]() {
 
         while (true) {
-            auto delay = std::chrono::steady_clock::now() + chrono::milliseconds(interval);
+            //cout << "Thread Generated\n";
+            auto delay = chrono::milliseconds(interval);
             func();
-            this_thread::sleep_until(delay);
+            
+            this_thread::sleep_for(delay);
         }
     }).detach();
 }
@@ -37,6 +40,8 @@ void take_screenshot() {
 
     keybd_event(VK_SNAPSHOT, 0, KEYEVENTF_KEYUP, 0); // Left Windows Key up
     keybd_event(VK_LWIN, 0, KEYEVENTF_KEYUP, 0); // Prnt Scrn up
+
+    std::cout << "Screenshot Taken!\n";
 }
 
 int main()
@@ -45,9 +50,9 @@ int main()
         /*int horizontal = 0;
         int vertical = 0;*/
         
-        //DesktopResolution(horizontal, vertical);
-        timer(take_screenshot, 10000);
         
+        timer(take_screenshot, 10000);
+        while (true);
         
         return 0;
 }
