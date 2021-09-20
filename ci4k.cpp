@@ -52,7 +52,7 @@ void take_screenshot() {
 
 int main()
 {
-        cout << "ci4k v1.0.0" << endl;
+        cout << "ci4k v1.0.1" << endl;
         /*int horizontal = 0;
         int vertical = 0;*/
         
