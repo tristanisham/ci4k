@@ -56,9 +56,10 @@ int main(int argc, char** argv)
         cout << "ci4k v1.2.0" << endl;
         /*int horizontal = 0;
         int vertical = 0;*/
-        
-        if (argc >= 1) {
 
+        
+        if (argc >= 2) {
+            /*cout << "y" << endl;*/
             timer(take_screenshot, stoi(argv[1]));
         }
         else {
