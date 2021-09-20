@@ -6,6 +6,7 @@
 #include <ctime>
 #include <thread>
 #include <functional>
+#include <string>
 
 
 
@@ -50,14 +51,22 @@ void take_screenshot() {
     cout << "Screenshot taken at: " << ctime(&time_now)  << endl;
 }
 
-int main()
+int main(int argc, char** argv)
 {
-        cout << "ci4k v1.0.2" << endl;
+        cout << "ci4k v1.2.0" << endl;
         /*int horizontal = 0;
         int vertical = 0;*/
         
+        if (argc >= 1) {
+
+            timer(take_screenshot, stoi(argv[1]));
+        }
+        else {
+            timer(take_screenshot, 1000);
+        }
         
-        timer(take_screenshot, 1000);
+        
+       
         while (true);
         
         return 0;
