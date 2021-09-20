@@ -1,11 +1,13 @@
 // ci4k.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+#include <chrono>  
 #include "wtypes.h"
 #include <iostream>
-#include <chrono>
 #include <ctime>
 #include <thread>
 #include <functional>
+
+
 
 using namespace std;
 
@@ -34,19 +36,23 @@ void timer(function<void(void)> func, unsigned int interval) {
     }).detach();
 }
 
+
+
 void take_screenshot() {
     keybd_event(VK_LWIN, 0, 0, 0); // Left Windows Key down
     keybd_event(VK_SNAPSHOT, 0, 0, 0); // Prnt Scrn down
 
     keybd_event(VK_SNAPSHOT, 0, KEYEVENTF_KEYUP, 0); // Left Windows Key up
     keybd_event(VK_LWIN, 0, KEYEVENTF_KEYUP, 0); // Prnt Scrn up
+    
+    auto time_now = chrono::system_clock::to_time_t(chrono::system_clock::now());
 
-    std::cout << "Screenshot Taken!\n";
+    cout << "Screenshot taken at: " << ctime(&time_now)  << endl;
 }
 
 int main()
 {
-        std::cout << "ci4k v1.0.0\n";
+        cout << "ci4k v1.0.0" << endl;
         /*int horizontal = 0;
         int vertical = 0;*/
         
