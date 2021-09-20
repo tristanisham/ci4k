@@ -57,7 +57,7 @@ int main()
         int vertical = 0;*/
         
         
-        timer(take_screenshot, 10000);
+        timer(take_screenshot, 1000);
         while (true);
         
         return 0;
